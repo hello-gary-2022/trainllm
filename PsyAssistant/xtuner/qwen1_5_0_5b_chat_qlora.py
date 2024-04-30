@@ -18,19 +18,20 @@ from xtuner.engine.hooks import (DatasetInfoHook, EvaluateChatHook,
 from xtuner.engine.runner import TrainLoop
 from xtuner.model import SupervisedFinetune
 from xtuner.utils import PROMPT_TEMPLATE, SYSTEM_TEMPLATE
+from mmengine.visualization import Visualizer, TensorboardVisBackend
 
 #######################################################################
 #                          PART 1  Settings                           #
 #######################################################################
 # Model
-pretrained_model_name_or_path = 'G:/ws/models/Qwen1.5-0.5B-Chat'
+pretrained_model_name_or_path = '/home/ws/models/Qwen1.5-0.5B-Chat'
 use_varlen_attn = False
 
 # Data
 dataset_map_fn = None
-alpaca_en_path = '../datasets'
+alpaca_en_path = './datasets'
 prompt_template = PROMPT_TEMPLATE.qwen_chat
-max_length = 2048
+max_length = 1048
 pack_to_max_length = True
 
 # Scheduler & Optimizer
@@ -195,7 +196,7 @@ env_cfg = dict(
 )
 
 # set visualizer
-visualizer = None
+visualizer = dict(type=Visualizer, vis_backends=[dict(type=TensorboardVisBackend)])
 
 # set log level
 log_level = 'INFO'
